@@ -1,0 +1,42 @@
+{
+  "name": "payit",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "husky": "^0.14.3",
+    "jest-expo": "26.0.0",
+    "lint-staged": "^7.0.4",
+    "prettier": "^1.12.0",
+    "react-native-scripts": "1.13.1",
+    "react-test-renderer": "16.3.0-alpha.1"
+  },
+  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
+  "scripts": {
+    "start": "react-native-scripts start",
+    "eject": "react-native-scripts eject",
+    "android": "react-native-scripts android",
+    "ios": "react-native-scripts ios",
+    "test": "jest",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prettier": "prettier --write '*.js'",
+    "format-code": "npm run prettier && npm run lint:fix",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": ["npm run format-code", "git add"]
+  },
+  "jest": {
+    "preset": "jest-expo"
+  },
+  "dependencies": {
+    "expo": "^26.0.0",
+    "react": "16.3.0-alpha.1",
+    "react-native": "0.54.0"
+  }
+}

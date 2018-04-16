@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
 import homeReducer from './homeReducer';
+import loadingReducer from './loadingReducer';
 
 export default combineReducers({
-  homeReducer,
+  home: homeReducer,
+  transaction: loadingReducer,
 });

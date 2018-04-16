@@ -1,4 +1,5 @@
 import homeApi from '../api/homeApi';
+import { setLoading } from './loading';
 
 export const HOME_INIT = 'HOME_INIT';
 export const HOME_INIT_SUCCESS = 'HOME_INIT_SUCCESS';
@@ -18,10 +19,15 @@ export const homeInitSuccess = data => ({
 export function fetchHome() {
   return (dispatch) => {
     dispatch(homeInit());
+    dispatch(setLoading(true));
     homeApi()
       .then((data) => {
         dispatch(homeInitSuccess(data.message));
+        dispatch(setLoading(false));
       })
-      .catch(err => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        dispatch(setLoading(false));
+      });
   };
 }

@@ -30,6 +30,7 @@ class HomeScreen extends Component {
         }}
       >
         <Text>{this.props.message}</Text>
+        <Text>{this.props.loading ? 'loading' : 'not loading'}</Text>
         <Button title="Ceva" color="#841584" onPress={this.logCeva} />
         <Button title="Disp" color="#841584" onPress={this.props.initializeHome} />
       </View>
@@ -39,11 +40,16 @@ class HomeScreen extends Component {
 
 HomeScreen.propTypes = {
   message: PropTypes.string.isRequired,
+  loading: PropTypes.bool,
   initializeHome: PropTypes.func.isRequired,
 };
 
+HomeScreen.defaultProps = {
+  loading: false,
+};
+
 function mapStateToProps(state) {
-  return { message: state.homeReducer.message };
+  return { message: state.home.message, loading: state.transaction.loading };
 }
 
 function mapDispatchToProps(dispatch) {

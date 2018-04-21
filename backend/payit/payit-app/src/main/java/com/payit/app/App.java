@@ -5,6 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 @SpringBootApplication
 @RestController
 public class App {
@@ -13,7 +17,9 @@ public class App {
     }
 
     @GetMapping(value = {"/", "/hello"})
-    public String greet() {
-        return "Hello, World";
+    public Object greet() {
+        Map<String, String> resp = new HashMap<>();
+        resp.put("message", UUID.randomUUID().toString());
+        return resp;
     }
 }

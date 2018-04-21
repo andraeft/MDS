@@ -6,7 +6,6 @@ export const HOME_INIT_SUCCESS = 'HOME_INIT_SUCCESS';
 
 export const homeInit = () => ({
   type: HOME_INIT,
-  payload: { message: 'mesaj payload' },
 });
 
 export const homeInitSuccess = data => ({
@@ -20,6 +19,7 @@ export function fetchHome() {
   return (dispatch) => {
     dispatch(homeInit());
     dispatch(setLoading(true));
+
     homeApi()
       .then((data) => {
         dispatch(homeInitSuccess(data.message));

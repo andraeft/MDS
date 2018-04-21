@@ -11,10 +11,6 @@ class HomeScreen extends Component {
     this.logCeva = this.logCeva.bind(this);
   }
 
-  componentWillMount() {
-    this.props.initializeHome();
-  }
-
   logCeva() {
     console.log(this.props);
   }

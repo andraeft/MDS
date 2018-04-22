@@ -34,7 +34,7 @@ export const SignedIn = StackNavigator(
   },
 );
 
-export const RootNavigator = SignedOut;
+export const RootNavigator = SignedIn;
 
 // export const RootNavigator = (function (signedIn) {
 //   return SwitchNavigator(

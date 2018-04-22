@@ -23,13 +23,17 @@ public class App {
 
     @GetMapping(value = {"/api", "/api/hello"})
     public Object greet() {
-        Map<String, String> resp = new HashMap<>();
-        resp.put("message", UUID.randomUUID().toString());
-        return resp;
+        return getResp("Protected: " + UUID.randomUUID().toString());
     }
 
     @GetMapping(value = "/public")
-    public String publicMethod() {
-        return "{\"message\": \"Hello, public\"}";
+    public Object publicMethod() {
+        return getResp("Public: " + UUID.randomUUID().toString());
+    }
+
+    private Object getResp(String msg) {
+        Map<String, String> resp = new HashMap<>();
+        resp.put("message", msg);
+        return resp;
     }
 }

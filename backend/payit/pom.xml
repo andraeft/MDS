@@ -18,6 +18,7 @@
 
     <modules>
         <module>payit-app</module>
+        <module>payit-security</module>
     </modules>
 
     <dependencies>

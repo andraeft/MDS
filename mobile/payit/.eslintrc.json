@@ -11,6 +11,8 @@
         "extensions": [".js", ".jsx"]
       }
     ],
-    "no-console": "off"
+    "no-console": "off",
+    "react/prop-types": 0,
+    "no-use-before-define": "off"
   }
 }

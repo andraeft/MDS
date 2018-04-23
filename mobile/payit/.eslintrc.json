@@ -12,6 +12,7 @@
       }
     ],
     "no-console": "off",
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "no-use-before-define": "off"
   }
 }

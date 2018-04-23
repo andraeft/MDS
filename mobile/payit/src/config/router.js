@@ -1,4 +1,4 @@
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, SwitchNavigator } from 'react-navigation';
 import HomeScreen from '../screens/HomeScreen';
 import SigninScreen from '../screens/SigninScreen';
 import SignupScreen from '../screens/SignupScreen';
@@ -34,20 +34,18 @@ export const SignedIn = StackNavigator(
   },
 );
 
-export const RootNavigator = SignedIn;
+// export const RootNavigator = SignedIn;
 
-// export const RootNavigator = (function (signedIn) {
-//   return SwitchNavigator(
-//     {
-//       SignedIn: {
-//         screen: SignedIn,
-//       },
-//       SignedOut: {
-//         screen: SignedOut,
-//       },
-//     },
-//     {
-//       initialRouteName: signedIn ? 'SignedIn' : 'SignedOut',
-//     },
-//   );
-// }(false));
+export const RootNavigator = SwitchNavigator(
+  {
+    SignedOut: {
+      screen: SignedOut,
+    },
+    SignedIn: {
+      screen: SignedIn,
+    },
+  },
+  {
+    initialRouteName: 'SignedOut',
+  },
+);

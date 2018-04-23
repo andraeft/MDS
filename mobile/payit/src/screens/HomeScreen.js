@@ -5,22 +5,6 @@ import PropTypes from 'prop-types';
 
 import { fetchHome, privateHome } from '../actions/home';
 
-import { login } from '../api/homeApi';
-
-const authenticate = () => {
-  console.log('authenticating...');
-  console.log(login === undefined ? 'nope' : 'este');
-  login('user', 'password')
-    .then((data) => {
-      console.log('autentificare cu succes');
-      console.log(data);
-    })
-    .catch((err) => {
-      console.log('eroare autentificare');
-      console.log(err);
-    });
-};
-
 class HomeScreen extends Component {
   constructor() {
     super();
@@ -46,7 +30,6 @@ class HomeScreen extends Component {
         <Button title="Ceva" color="#841584" onPress={this.logCeva} />
         <Button title="Public" color="#841584" onPress={this.props.initializeHome} />
         <Button title="Private" color="#841584" onPress={this.props.privateRequest} />
-        <Button title="Login" color="#841584" onPress={authenticate} />
       </View>
     );
   }

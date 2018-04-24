@@ -4,3 +4,11 @@ services:
     image: blucian/payit:1.0-SNAPSHOT
     ports:
       - "8080:8080"
+  mysql:
+    image: datajoint/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+    volumes:
+      - /var/lib/mysql:/var/lib/mysql

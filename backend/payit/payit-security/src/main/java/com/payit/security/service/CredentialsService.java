@@ -12,8 +12,8 @@ public class CredentialsService {
     private final CredentialsRepository repo;
 
     public void createUser(String username,String password){
-        Credentials log= new Credentials(username,password,UUID.randomUUID().toString());
-        //repo.save(log);
+        Credentials log = new Credentials(UUID.randomUUID().toString(), username, password);
+        repo.save(log);
     }
 
     @Autowired

@@ -3,9 +3,11 @@ package com.payit.security.config;
 import com.payit.security.MyAuthenticationSuccessHandler;
 import com.payit.security.RestAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,6 +19,8 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 @Configuration
 @EnableWebSecurity
 @ComponentScan("com.payit.security")
+@EnableJpaRepositories(basePackages = "com.payit.security.repository")
+@EntityScan(basePackages = "com.payit.security.model")
 public class SecurityConfig extends WebSecurityConfigurerAdapter  {
 
     private final RestAuthenticationEntryPoint authenticationEntryPoint;

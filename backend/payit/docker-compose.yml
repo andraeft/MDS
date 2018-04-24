@@ -1,0 +1,6 @@
+version: '2'
+services:
+  payit:
+    image: blucian/payit:1.0-SNAPSHOT
+    ports:
+      - "8080:8080"

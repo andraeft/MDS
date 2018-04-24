@@ -3,17 +3,21 @@ package com.payit.security.config;
 import com.payit.security.MyAuthenticationSuccessHandler;
 import com.payit.security.RestAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
 @Configuration
@@ -21,16 +25,23 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 @ComponentScan("com.payit.security")
 @EnableJpaRepositories(basePackages = "com.payit.security.repository")
 @EntityScan(basePackages = "com.payit.security.model")
+@Import(EncoderConfig.class)
 public class SecurityConfig extends WebSecurityConfigurerAdapter  {
 
     private final RestAuthenticationEntryPoint authenticationEntryPoint;
     private final MyAuthenticationSuccessHandler authenticationSuccessHandler;
+    private final UserDetailsService userDetailsService;
+    private final PasswordEncoder encoder;
 
     @Autowired
     public SecurityConfig(RestAuthenticationEntryPoint authenticationEntryPoint,
-                          MyAuthenticationSuccessHandler authenticationSuccessHandler) {
+                          MyAuthenticationSuccessHandler authenticationSuccessHandler,
+                          @Qualifier("appUserDetailsService") UserDetailsService userDetailsService,
+                          PasswordEncoder encoder) {
         this.authenticationEntryPoint = authenticationEntryPoint;
         this.authenticationSuccessHandler = authenticationSuccessHandler;
+        this.userDetailsService = userDetailsService;
+        this.encoder = encoder;
     }
 
     @Override
@@ -56,14 +67,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
 
     @Override
     @Autowired
-    @SuppressWarnings({"squid:CallToDeprecatedMethod", "deprecation"})
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) {
         auth
-                .inMemoryAuthentication()
-                .passwordEncoder(NoOpPasswordEncoder.getInstance())
-                .withUser("user")
-                .password("password")
-                .roles("USER");
+                .authenticationProvider(authenticationProvider());
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(encoder);
+        return authProvider;
     }
 
     @Bean

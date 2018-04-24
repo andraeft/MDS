@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CredentialsRepository extends JpaRepository<Credentials,String>{
-
+    Credentials findByUsername(String username);
 }

@@ -23,6 +23,7 @@
     <modules>
         <module>payit-app</module>
         <module>payit-security</module>
+        <module>payit-files</module>
     </modules>
 
     <dependencies>

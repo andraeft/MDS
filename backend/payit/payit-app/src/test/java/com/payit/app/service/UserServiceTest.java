@@ -1,5 +1,6 @@
 package com.payit.app.service;
 
+import com.payit.security.model.Credentials;
 import com.payit.security.repository.CredentialsRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +18,7 @@ public class UserServiceTest {
     private CredentialsRepository credRepo;
     @Test
     public void createUser() {
-        userService.createUser(credRepo.findAll().get(0));
+        Credentials cred = credRepo.findAll().get(0);
+        userService.createUser(cred);
     }
 }

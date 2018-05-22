@@ -3,14 +3,19 @@ package com.payit.app;
 import com.payit.security.config.SecurityConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
+@EnableJpaRepositories(basePackages = "com.payit.app.repository")
+@ComponentScan("com.payit.app")
+@EntityScan(basePackages = "com.payit.app.model")
 @SpringBootApplication
 @RestController
 @Import({

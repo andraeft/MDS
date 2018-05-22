@@ -1,5 +1,6 @@
 package com.payit.app;
 
+import com.payit.files.service.FilesModuleConfig;
 import com.payit.security.config.SecurityConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,13 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
 @EnableJpaRepositories(basePackages = "com.payit.app.repository")
 @ComponentScan("com.payit.app")
 @EntityScan(basePackages = "com.payit.app.model")
 @SpringBootApplication
 @RestController
 @Import({
-        SecurityConfig.class
+        SecurityConfig.class,
+        FilesModuleConfig.class
 })
 public class App {
     public static void main(String[] args) {

@@ -24,13 +24,10 @@
         <module>payit-app</module>
         <module>payit-security</module>
         <module>payit-files</module>
+        <module>payit-common</module>
     </modules>
 
     <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

@@ -28,7 +28,7 @@ const signupClick = (nav) => {
   }
 };
 
-export default (navigation) => (
+export default ({navigation}) => (
   <View style={{ paddingVertical: 20 }}>
     <Card>
       <FormLabel>Username</FormLabel>

@@ -5,6 +5,7 @@ import NavigationService from '../service/NavigationService';
 const instance = axios.create({
   // baseURL: 'http://192.168.100.8:8080',
   baseURL: 'http://18.236.173.66:8080',
+  // baseURL: 'http://192.168.43.26:8080',
   timeout: 1000,
 });
 

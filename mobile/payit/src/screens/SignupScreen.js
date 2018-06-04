@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Card, Button, FormLabel, FormInput } from 'react-native-elements';
+import { Card, Button, FormLabel, FormInput, Text } from 'react-native-elements';
 import { login, register } from '../api/authentication';
 
 const formDataUp = {
@@ -49,6 +49,7 @@ export default (navigation) => (
 
       <Button buttonStyle={{ marginTop: 20 }} background-color="#03A9F4" title="SIGN UP"
       onPress={() => signupClick(navigation)} />
+      <Text> eroare inregistrare </Text>
     </Card>
   </View>
 );

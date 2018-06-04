@@ -10,4 +10,13 @@ const login = (username, password) => axios.post(
   }),
 );
 
-export default login;
+const register = (username, password) => axios.post (
+  '/public/credentials',
+  qs.stringify({
+    username,
+    password,
+  }),
+);
+
+export {login, register};
+

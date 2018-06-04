@@ -11,6 +11,7 @@ const instance = axios.create({
 instance.interceptors.response.use(response => response.data, error => handleRequestError(error));
 
 function handleRequestError(error) {
+  console.log(error);
   if (error.response.status === 401) {
     NavigationService.navigate('SignedOut');
   }

@@ -46,6 +46,6 @@ export const RootNavigator = SwitchNavigator(
     },
   },
   {
-    initialRouteName: 'SignedIn',
+    initialRouteName: 'SignedOut',
   },
 );

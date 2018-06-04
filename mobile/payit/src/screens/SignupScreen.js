@@ -12,43 +12,57 @@ const formDataUp = {
 const signupClick = (nav) => {
   console.log('authenticating...');
   console.log(formDataUp);
-  if (formDataUp.password == formDataUp.confirmPassword && formDataUp.password != null)
-  {register(formDataUp.username, formDataUp.password)
-    .then((data) => {
-      console.log('register success');
-      login(formDataUp.username, formDataUp.password)
-        .then((data) => {
-         nav.navigate('SignedIn');}
-        );
-    })
-    .catch((err) => {
-      console.log('error registering');
-      console.log(err);
-    });
+  if (formDataUp.password === formDataUp.confirmPassword && formDataUp.password != null) {
+    console.log(formDataUp);
+    register(formDataUp.username, formDataUp.password)
+      .then(() => {
+        console.log('register success');
+        login(formDataUp.username, formDataUp.password)
+          .then(() => {
+            console.log('m-am logat');
+            nav.navigate('SignedIn');
+          });
+      })
+      .catch((err) => {
+        console.log('error registering');
+        console.log(err);
+      });
   }
 };
 
-export default (navigation) => (
+export default ({ navigation }) => (
   <View style={{ paddingVertical: 20 }}>
     <Card>
       <FormLabel>Username</FormLabel>
-      <FormInput placeholder="Username..." 
-       onChangeText={(text) => {
+      <FormInput
+        placeholder="Username..."
+        onChangeText={(text) => {
           formDataUp.username = text;
-        }} />
+        }}
+      />
       <FormLabel>Password</FormLabel>
-      <FormInput secureTextEntry placeholder="Password..."
-       onChangeText={(text) => {
-        formDataUp.password = text;
-      }} />
+      <FormInput
+        secureTextEntry
+        placeholder="Password..."
+        onChangeText={(text) => {
+          formDataUp.password = text;
+        }}
+      />
       <FormLabel>Confirm Password</FormLabel>
-      <FormInput secureTextEntry placeholder="Confirm Password..."
-       onChangeText={(text) => {
-        formDataUp.confirmPassword = text;
-      }} />
+      <FormInput
+        secureTextEntry
+        placeholder="Confirm Password..."
+        onChangeText={(text) => {
+          formDataUp.confirmPassword = text;
+        }}
+      />
 
-      <Button buttonStyle={{ marginTop: 20 }} background-color="#03A9F4" title="SIGN UP"
-      onPress={() => signupClick(navigation)} />
+      <Button
+        buttonStyle={{ marginTop: 20 }}
+        background-color="#03A9F4"
+        title="SIGN UP"
+        onPress={() => signupClick(navigation)}
+      />
     </Card>
   </View>
 );

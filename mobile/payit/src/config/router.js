@@ -33,15 +33,15 @@ export const SignedIn = TabNavigator(
     },
     Search: {
       screen: SearchScreen,
-      navigationOptions : {
+      navigationOptions: {
         title: 'Search',
       },
     },
     Chat: {
       screen: ChatScreen,
-      navigationOptions : {
+      navigationOptions: {
         title: 'Chat',
-        },
+      },
     },
     TransactionHistory: {
       screen: TransactionHistoryScreen,

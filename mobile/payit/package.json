@@ -21,12 +21,7 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "jest",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "prettier": "prettier --write '*.js'",
-    "format-code": "npm run prettier && npm run lint:fix",
-    "precommit": "lint-staged"
+    "test": "jest"
   },
   "lint-staged": {
     "*.js": [

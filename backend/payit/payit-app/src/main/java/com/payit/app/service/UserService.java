@@ -18,7 +18,6 @@ public class UserService{
         User newUser = new User();
         newUser.setFkCredentials(credential);
         return repo.save(newUser);
-
     }
 
     @Transactional
@@ -32,6 +31,7 @@ public class UserService{
             modifyUser.setFirstName(firstName);
         if(lastName!=null)
             modifyUser.setLastName(lastName);
+        repo.save(modifyUser);
     }
 
     public User findById(Integer id) {
@@ -48,5 +48,9 @@ public class UserService{
             users.addAll(repo.findByLastName(word));
         }
         return users;
+    }
+
+    public User findByUId(String uid) {
+        return repo.findAllByFkCredentials_Id(uid).get(0);
     }
 }

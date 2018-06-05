@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Card, Button, FormLabel, FormInput } from 'react-native-elements';
-import login from '../api/authentication';
+import { login } from '../api/authentication';
 
 const formData = {
   username: null,

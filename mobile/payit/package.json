@@ -21,7 +21,12 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prettier": "prettier --write '*.js'",
+    "format-code": "npm run prettier && npm run lint:fix",
+    "precommit": "lint-staged"
   },
   "lint-staged": {
     "*.js": [
@@ -44,6 +49,7 @@
     "react-navigation": "^1.5.11",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "tcomb-form-native": "^0.6.13"
   }
 }

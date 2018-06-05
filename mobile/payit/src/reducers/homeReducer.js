@@ -1,7 +1,12 @@
 import { HOME_INIT, HOME_INIT_SUCCESS } from '../actions/home';
 
 const INITIAL_STATE = {
-  message: 'initial',
+  profilePic: 'default',
+  bankRating: 0,
+  slaveRating: 0,
+  firstName: '',
+  lastName: '',
+  email: '',
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -12,7 +17,13 @@ export default (state = INITIAL_STATE, action) => {
     case HOME_INIT_SUCCESS: {
       return {
         ...state,
-        message: action.payload.message,
+        profilePic: action.payload.profilePic,
+        bankRating: action.payload.bankRating,
+        slaveRating: action.payload.slaveRating,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        email: action.payload.email,
+        id: action.payload.id,
       };
     }
     default: {

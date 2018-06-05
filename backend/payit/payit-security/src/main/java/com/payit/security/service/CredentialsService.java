@@ -34,6 +34,6 @@ public class CredentialsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String s) {
         Credentials c = repo.findByUsername(s);
         if (c == null) throw new UsernameNotFoundException("User not found");
-        return new MyUserDetails(c.getUsername(), c.getPassword());
+        return new MyUserDetails(c.getUsername(), c.getPassword(), c.getId());
     }
 }

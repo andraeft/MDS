@@ -1,7 +1,10 @@
-import { StackNavigator, SwitchNavigator } from 'react-navigation';
+import { StackNavigator, SwitchNavigator, TabNavigator } from 'react-navigation';
 import HomeScreen from '../screens/HomeScreen';
 import SigninScreen from '../screens/SigninScreen';
 import SignupScreen from '../screens/SignupScreen';
+import SearchScreen from '../screens/SearchScreen';
+import ChatScreen from '../screens/ChatScreen';
+import TransactionHistoryScreen from '../screens/TransactionHistoryScreen';
 
 export const SignedOut = StackNavigator(
   {
@@ -23,10 +26,28 @@ export const SignedOut = StackNavigator(
   },
 );
 
-export const SignedIn = StackNavigator(
+export const SignedIn = TabNavigator(
   {
     Main: {
       screen: HomeScreen,
+    },
+    Search: {
+      screen: SearchScreen,
+      navigationOptions: {
+        title: 'Search',
+      },
+    },
+    Chat: {
+      screen: ChatScreen,
+      navigationOptions: {
+        title: 'Chat',
+      },
+    },
+    TransactionHistory: {
+      screen: TransactionHistoryScreen,
+      navigationOptions: {
+        title: 'History',
+      },
     },
   },
   {

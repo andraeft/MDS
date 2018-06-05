@@ -26,9 +26,9 @@ public class UserServiceTest {
     public void modifyUser(){
         Credentials cred = credRepo.findAll().get(0);
         User newUser=userService.createUser(cred);
-        userService.modifyUser("pularau@info.ro","Sandu","Ghiulea",newUser.getId());
+        userService.modifyUser("ppp@info.ro","Sandu","Ghiulea",newUser.getId());
         User testUser=userService.findById(newUser.getId());
-        assertEquals(testUser.getEmail(),"pularau@info.ro");
+        assertEquals(testUser.getEmail(),"ppp@info.ro");
         assertEquals(testUser.getFirstName(),"Sandu");
         assertEquals(testUser.getLastName(),"Ghiulea");
     }

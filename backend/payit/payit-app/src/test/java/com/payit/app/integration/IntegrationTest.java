@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("ALL")
 @ContextConfiguration(classes = App.class)
 @WebAppConfiguration
 @TestPropertySource("classpath:application.properties")
@@ -34,42 +35,53 @@ public class IntegrationTest {
     @Autowired
     protected RestTemplate restTemplate;
 
-    void executeGet(String url) throws IOException {
-        final Map<String, String> headers = new HashMap<>();
-        headers.put("Accept", "application/json");
-        final HeaderSettingRequestCallback requestCallback = new HeaderSettingRequestCallback(headers);
-        ResponseResultErrorHandler errorHandler = new ResponseResultErrorHandler();
+    void executeGet(String url) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
 
-        restTemplate.setErrorHandler(errorHandler);
-
-        latestResponse = restTemplate.execute(url, HttpMethod.GET, requestCallback, response -> {
-            if (errorHandler.hadError) {
-                return (errorHandler.getResults());
-            } else {
-                return (new ResponseResults(response));
-            }
-        });
-    }
-
-    void executePost(String url) {
-        final Map<String, String> headers = new HashMap<>();
-        headers.put("Accept", "application/json");
-        final HeaderSettingRequestCallback requestCallback = new HeaderSettingRequestCallback(headers);
-        final ResponseResultErrorHandler errorHandler = new ResponseResultErrorHandler();
-
+        if (cookie != null) headers.add("Cookie", "PAYITSESSIONID=" + cookie);
         if (restTemplate == null) {
             restTemplate = new RestTemplate();
         }
 
-        restTemplate.setErrorHandler(errorHandler);
-        latestResponse = restTemplate
-                .execute(url, HttpMethod.POST, requestCallback, response -> {
-                    if (errorHandler.hadError) {
-                        return (errorHandler.getResults());
-                    } else {
-                        return (new ResponseResults(response));
-                    }
-                });
+        HttpEntity requestEntity = new HttpEntity(null, headers);
+
+        try {
+            ResponseEntity response = restTemplate.exchange(
+                    url,
+                    HttpMethod.GET,
+                    requestEntity,
+                    Object.class
+            );
+            status = response.getStatusCode();
+            latestResponseE = response;
+        } catch (HttpClientErrorException e) {
+            status = e.getStatusCode();
+        }
+    }
+
+    void executePost(String url, Object body) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        if (cookie != null) headers.add("Cookie", "PAYITSESSIONID=" + cookie);
+        if (restTemplate == null) {
+            restTemplate = new RestTemplate();
+        }
+        HttpEntity requestEntity = new HttpEntity(body, headers);
+
+        try {
+            ResponseEntity response = restTemplate.exchange(
+                    url,
+                    HttpMethod.POST,
+                    requestEntity,
+                    Object.class
+            );
+            status = response.getStatusCode();
+            latestResponseE = response;
+        } catch (HttpClientErrorException e) {
+            status = e.getStatusCode();
+        }
     }
 
     void executeUrlPost(String url, Map<String, String> params) {

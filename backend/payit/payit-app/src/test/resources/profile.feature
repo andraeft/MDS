@@ -8,4 +8,5 @@ Feature: the user can manage his profile data
      And the user logs in
      And the user has queried his profile
      Then the user can edit his profile
+     And the user has queried his profile
      And see the changes

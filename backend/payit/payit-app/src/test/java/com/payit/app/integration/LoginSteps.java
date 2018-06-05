@@ -25,8 +25,6 @@ public class LoginSteps extends IntegrationTest {
     @And("^the client calls log in$")
     public void theClientCallsLogIn() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        System.out.println(username);
-        System.out.println(password);
 
         Map<String, String> params = new LinkedHashMap<>();
         params.put("username", username);

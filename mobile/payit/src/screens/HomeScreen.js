@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { fetchHome, privateHome } from '../actions/home';
+import { fetchHome } from '../actions/home';
+import UserDataForm from '../components/UserDataForm';
+import Picture from '../components/Picture';
+import { editUser } from '../api/homeApi';
 
 class HomeScreen extends Component {
-  constructor() {
-    super();
-    this.logCeva = this.logCeva.bind(this);
-  }
-
-  logCeva() {
-    console.log(this.props);
+  componentWillMount() {
+    this.props.initializeHome();
   }
 
   render() {
@@ -20,40 +18,65 @@ class HomeScreen extends Component {
       <View
         style={{
           flex: 1,
-          backgroundColor: '#ddd',
-          justifyContent: 'center',
-          alignItems: 'center',
+          backgroundColor: 'steelblue',
         }}
       >
-        <Text>{this.props.message}</Text>
-        <Text>{this.props.loading ? 'loading' : 'not loading'}</Text>
-        <Button title="Ceva" color="#841584" onPress={this.logCeva} />
-        <Button title="Public" color="#841584" onPress={this.props.initializeHome} />
-        <Button title="Private" color="#841584" onPress={this.props.privateRequest} />
+        <View style={{ flex: 3, flexDirection: 'row' }}>
+          <View style={{ aspectRatio: 1, flex: 1 }}>
+            <Picture url={this.props.profilePic} />
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text>{`Bank rating: ${this.props.bankRating}`}</Text>
+            <Text>{`Slave rating: ${this.props.slaveRating}`}</Text>
+          </View>
+        </View>
+        <View style={{ flex: 5 }}>
+          <Text>Date despre user</Text>
+          <UserDataForm
+            firstName={this.props.firstName}
+            lastName={this.props.lastName}
+            email={this.props.email}
+            action={(data) => {
+              console.log(this.props.userId);
+              console.log(data);
+              editUser(this.props.userId, data.firstName, data.lastName, data.email)
+                .then(() => { console.log('edit reusit'); })
+                .catch((e) => { console.log(e, 'editare nereusita'); });
+            }}
+          />
+        </View>
       </View>
     );
   }
 }
 
 HomeScreen.propTypes = {
-  message: PropTypes.string.isRequired,
-  loading: PropTypes.bool,
-  initializeHome: PropTypes.func.isRequired,
-  privateRequest: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
+  profilePic: PropTypes.string,
+  bankRating: PropTypes.number,
+  slaveRating: PropTypes.number,
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  email: PropTypes.string,
 };
 
 HomeScreen.defaultProps = {
-  loading: false,
+  profilePic: 'def',
+  bankRating: 0,
+  slaveRating: 0,
+  firstName: 'def',
+  lastName: 'def',
+  email: 'def',
 };
 
 function mapStateToProps(state) {
-  return { message: state.home.message, loading: state.transaction.loading };
+  return { ...state.home, userId: state.home.id, loading: state.transaction.loading };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     initializeHome: () => dispatch(fetchHome()),
-    privateRequest: () => dispatch(privateHome()),
+    // privateRequest: () => dispatch(privateHome()),
   };
 }
 

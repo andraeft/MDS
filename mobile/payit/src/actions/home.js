@@ -10,9 +10,7 @@ export const homeInit = () => ({
 
 export const homeInitSuccess = data => ({
   type: HOME_INIT_SUCCESS,
-  payload: {
-    message: data,
-  },
+  payload: data,
 });
 
 export function fetchHome() {
@@ -22,7 +20,7 @@ export function fetchHome() {
 
     initHome()
       .then((data) => {
-        dispatch(homeInitSuccess(data.message));
+        dispatch(homeInitSuccess(data));
         dispatch(setLoading(false));
       })
       .catch((err) => {

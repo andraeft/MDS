@@ -8,6 +8,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
+import java.util.UUID;
+
 import static org.junit.Assert.*;
 
 @SpringBootTest
@@ -17,14 +21,16 @@ public class UserServiceTest {
     private UserService userService;
     @Autowired
     private CredentialsRepository credRepo;
+
     @Test
     public void createUser() {
-        Credentials cred = credRepo.findAll().get(0);
+        Credentials cred = credRepo.save(new Credentials(UUID.randomUUID().toString(), "test-us", "test-pw"));
         userService.createUser(cred);
     }
     @Test
     public void modifyUser(){
-        Credentials cred = credRepo.findAll().get(0);
+        List<Credentials> l = credRepo.findAll();
+        Credentials cred = l.get(l.size() - 1);
         User newUser=userService.createUser(cred);
         userService.modifyUser("ppp@info.ro","Sandu","Ghiulea",newUser.getId());
         User testUser=userService.findById(newUser.getId());
